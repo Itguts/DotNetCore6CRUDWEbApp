@@ -1,5 +1,7 @@
 using EmployeeCRUD.Data;
 using Microsoft.EntityFrameworkCore;
+using static System.Formats.Asn1.AsnWriter;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,13 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+
 }
+
+using var scope = app.Services.CreateScope();
+await using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+await dbContext.Database.MigrateAsync();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

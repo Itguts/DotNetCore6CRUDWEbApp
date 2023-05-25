@@ -20,5 +20,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 # Set environment variables for Azure SQL Database
-ENV ConnectionStrings__DefaultConnection="Server=tcp:yourserver.database.windows.net,1433;Initial Catalog=yourdatabase;Persist Security Info=False;User ID=yourusername;Password=yourpassword;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+ENV ConnectionStrings__DefaultConnection="Server=tcp:itgutsserver.database.windows.net,1433;Initial Catalog=itgutsdb;Persist Security Info=False;User ID=vikash;Password=Password@1v;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+#ENV ConnectionStrings__DefaultConnection="Server=.; Database=EmployeeDatabase; integrated security=true; Trusted_Connection=True; MultipleActiveResultSets=true"
 ENTRYPOINT ["dotnet", "EmployeeCRUD.dll"]
